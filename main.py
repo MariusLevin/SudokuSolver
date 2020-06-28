@@ -5,7 +5,7 @@ from solver.graph_solver import GraphSolver
 
 if __name__ == '__main__':
     # Parameters
-    SOLVER_TYPE = "RAW"  # "RAW" or "GRAPH"
+    SOLVER_TYPE = "GRAPH"  # "RAW" or "GRAPH"
 
     problem, solution, grid_validation = get_grid(difficulty=0)
 
