@@ -1,4 +1,5 @@
 import numpy as np
+from data_structure.grid import Grid
 
 if __name__ == '__main__':
     problem = np.array([[0, 0, 0, 2, 6, 0, 7, 0, 1],
@@ -20,3 +21,6 @@ if __name__ == '__main__':
                          [5, 1, 9, 3, 2, 6, 8, 7, 4],
                          [2, 4, 8, 9, 5, 7, 1, 3, 6],
                          [7, 6, 3, 4, 1, 8, 2, 5, 9]])
+
+    gridProblem = Grid()
+    gridProblem.set_grid(problem)
