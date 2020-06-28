@@ -32,8 +32,8 @@ class GraphSolver:
 
     def __build_graph(self):
         """
-
-        :return:
+        Method to build a graph representing the sudoku problem
+        A node is like a cell, an edge a value constraint (line, column and box)
         """
         # Create nodes
         for row in range(0, self.__grid.get_number_of_row()):
@@ -61,7 +61,7 @@ class GraphSolver:
 
     def __display_graph(self):
         """
-
+        Method to display a graph
         """
         nx.draw(self.__nx_graph, with_labels=True, font_weight='bold')
         plt.show()
