@@ -115,7 +115,7 @@ class Grid:
         index_max_row = (floor(index / 3) + 1) * 3
         index_min_col = (index % 3) * 3
         index_max_col = ((index % 3) + 1) * 3
-        box = self.matrix[index_min_row:index_max_row, index_min_col:index_max_col]
+        box = self.__matrix[index_min_row:index_max_row, index_min_col:index_max_col]
 
         return box
 
@@ -127,4 +127,4 @@ class Grid:
         :param col_index: Column index of the selected cell
         :return: Return the value of the cell
         """
-        return self.matrix[row_index, col_index]
+        return self.__matrix[row_index, col_index]
