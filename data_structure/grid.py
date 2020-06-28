@@ -1,10 +1,11 @@
-from numpy import zeros
+import numpy as np
+from math import floor
 
 
 class Grid:
     def __init__(self):
         self.name = "Sudoku grid"
-        self.__matrix = zeros(shape=(9, 9))
+        self.__matrix = np.zeros(shape=(9, 9))
         self.__number_of_row = 9
         self.__number_of_col = 9
 
@@ -24,7 +25,7 @@ class Grid:
         :param grid_to_compare: Grid to compare
         :return: Return the number of valid and wrong cells
         """
-        result = zeros(shape=(self.__number_of_row, self.__number_of_col))
+        result = np.zeros(shape=(self.__number_of_row, self.__number_of_col))
         cpt_true = 0
         cpt_false = 0
 
@@ -82,3 +83,38 @@ class Grid:
         :return: return the column as a list of values
         """
         return self.__matrix[:, index]
+
+    def get_box_by_index(self, row, col):
+        """
+        Method to get a complete box of the grid
+
+        :param row: Rox index of a cell in the needed box
+        :param col: Column index of a cell in the needed box
+        :return: Return the box as an array of values
+        """
+        return self.get_box(self.get_box_index(row, col))
+
+    def get_box_index(self, row, col):
+        """
+        Method to get the box index of a selected cell
+
+        :param row: Row index of the selected cell
+        :param col: Column index of the selected cell
+        :return: Return the box index
+        """
+        return floor(row / 3) * 3 + floor(col / 3)
+
+    def get_box(self, index):
+        """
+        Method to get the box from its index
+
+        :param index: Index of the needed box
+        :return: Return the box as an array of values
+        """
+        index_min_row = floor(index / 3) * 3
+        index_max_row = (floor(index / 3) + 1) * 3
+        index_min_col = (index % 3) * 3
+        index_max_col = ((index % 3) + 1) * 3
+        box = self.matrix[index_min_row:index_max_row, index_min_col:index_max_col]
+
+        return box
