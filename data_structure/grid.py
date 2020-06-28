@@ -118,3 +118,13 @@ class Grid:
         box = self.matrix[index_min_row:index_max_row, index_min_col:index_max_col]
 
         return box
+
+    def get_value(self, row_index, col_index):
+        """
+        Method to get the value of o selected cell
+
+        :param row_index: Row index of the selected cell
+        :param col_index: Column index of the selected cell
+        :return: Return the value of the cell
+        """
+        return self.matrix[row_index, col_index]
