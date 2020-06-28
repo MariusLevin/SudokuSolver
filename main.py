@@ -1,7 +1,12 @@
 import numpy as np
 from data_structure.grid import Grid
+from solver.raw_force_solver import RawForceSolver
+from solver.graph_solver import GraphSolver
 
 if __name__ == '__main__':
+    # Parameters
+    SOLVER_TYPE = "RAW"  # "RAW" or "GRAPH"
+
     problem = np.array([[0, 0, 0, 2, 6, 0, 7, 0, 1],
                         [6, 8, 0, 0, 7, 0, 0, 9, 0],
                         [1, 9, 0, 0, 0, 4, 5, 0, 0],
@@ -25,10 +30,24 @@ if __name__ == '__main__':
     gridProblem = Grid()
     gridProblem.set_grid(problem)
 
+    gridAnswer = Grid()
+
+    if SOLVER_TYPE == "RAW":
+        solver = RawForceSolver()
+        solver.set_grid(gridProblem)
+
+        gridAnswer = solver.solve()
+
+    elif SOLVER_TYPE == "GRAPH":
+        solver = GraphSolver()
+        solver.set_grid(gridProblem)
+
+        gridAnswer = solver.solve()
+
     gridSolution = Grid()
     gridSolution.set_grid(solution)
 
-    valid, error = gridSolution.compare(gridProblem)
+    valid, error = gridSolution.compare(gridAnswer)
 
     print("Number of valid cells: " + str(valid))
     print("Number of error cells: " + str(error))
