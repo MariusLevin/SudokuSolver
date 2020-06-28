@@ -24,3 +24,11 @@ if __name__ == '__main__':
 
     gridProblem = Grid()
     gridProblem.set_grid(problem)
+
+    gridSolution = Grid()
+    gridSolution.set_grid(solution)
+
+    valid, error = gridSolution.compare(gridProblem)
+
+    print("Number of valid cells: " + str(valid))
+    print("Number of error cells: " + str(error))
