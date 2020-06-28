@@ -1,6 +1,7 @@
 from data_structure.grid import Grid
 import networkx as nx
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
+import pylab
 
 
 class GraphSolver:
@@ -63,8 +64,9 @@ class GraphSolver:
         """
         Method to display a graph
         """
-        nx.draw(self.__nx_graph, with_labels=True, font_weight='bold')
-        plt.show()
+        nx.draw(self.__nx_graph, with_labels=True, font_weight='bold', node_size=4000)
+        #plt.show()
+        pylab.show()
 
     def __fill_node_colors(self):
         """
