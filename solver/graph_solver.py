@@ -92,6 +92,12 @@ class GraphSolver:
         return self.__nx_graph.nodes[key]["color"]
 
     def __set_color(self, key, color):
+        """
+        Method to set the color of a node
+
+        :param key: Name of the node
+        :param color: Color to set
+        """
         self.__nx_graph.nodes[key]["color"] = color
 
     def __is_color_upgradeable(self, key):
@@ -104,6 +110,9 @@ class GraphSolver:
         return self.__nx_graph.nodes[key]["color_upgradeable"]
 
     def __init_node_available_colors(self):
+        """
+        Method to initialize the node available colors based on neighbors values
+        """
         for node in list(self.__nx_graph.nodes):
             self.__nx_graph.nodes[node]["available_colors"] = [i for i in range(1, 10)]
 
@@ -118,12 +127,24 @@ class GraphSolver:
                 self.__nx_graph.nodes[node]["available_colors"] = [node_color]
 
     def __remove_available_color(self, key, color):
+        """
+        Method to remove a node color from the available list
+
+        :param key: Name of the node
+        :param color: Color to remove
+        """
         color_buffer = self.__nx_graph.nodes[key]["available_colors"]
         if color in color_buffer:
             color_buffer.remove(color)
         self.__nx_graph.nodes[key]["available_colors"] = color_buffer
 
     def __add_available_color(self, key, color):
+        """
+        Method to add a node color to the available list
+
+        :param key: Name of the node
+        :param color: Color to add
+        """
         color_buffer = self.__nx_graph.nodes[key]["available_colors"]
         if color not in color_buffer:
             color_buffer.append(color)
