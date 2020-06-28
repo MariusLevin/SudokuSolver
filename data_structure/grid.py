@@ -41,6 +41,30 @@ class Grid:
 
         return cpt_true, cpt_false
 
+    def get_grid_size(self):
+        """
+        Method to get the grid size
+
+        :return: Return the number of row and column
+        """
+        return self.__number_of_row, self.__number_of_col
+
+    def get_number_of_row(self):
+        """
+        Method ti get the number of row
+
+        :return: Return the number of row
+        """
+        return self.__number_of_row
+
+    def get_number_of_col(self):
+        """
+        Method to get the number of column
+
+        :return: Return the number of column
+        """
+        return self.__number_of_col
+
     def get_row_by_index(self, index):
         """
         Method to get a complete row of the grid
