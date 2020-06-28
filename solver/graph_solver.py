@@ -26,6 +26,7 @@ class GraphSolver:
         """
         self.__build_graph()
         self.__fill_node_colors()
+        self.__init_node_available_colors()
 
         self.__display_graph()
 
@@ -77,8 +78,9 @@ class GraphSolver:
         nx.set_node_attributes(self.__nx_graph, True, "color_upgradeable")
 
         for node in self.__nx_graph.nodes:
-            self.__nx_graph.nodes[node]["color"] = self.__grid.get_value(node[0], node[1])
-            self.__nx_graph.nodes[node]["color_upgradeable"] = False
+            self.__set_color(node, self.__grid.get_value(node[0], node[1]))
+            if self.__get_color(node) != 0:
+                self.__nx_graph.nodes[node]["color_upgradeable"] = False
 
     def __get_color(self, key):
         """
@@ -89,6 +91,9 @@ class GraphSolver:
         """
         return self.__nx_graph.nodes[key]["color"]
 
+    def __set_color(self, key, color):
+        self.__nx_graph.nodes[key]["color"] = color
+
     def __is_color_upgradeable(self, key):
         """
         Method to get the upgradeable status of a node
@@ -97,3 +102,29 @@ class GraphSolver:
         :return: Return the upgradeable status
         """
         return self.__nx_graph.nodes[key]["color_upgradeable"]
+
+    def __init_node_available_colors(self):
+        for node in list(self.__nx_graph.nodes):
+            self.__nx_graph.nodes[node]["available_colors"] = [i for i in range(1, 10)]
+
+        for node in list(self.__nx_graph.nodes):
+            node_color = self.__get_color(node)
+
+            # Remove the node color from neighbors available colors
+            for neighbor in list(self.__nx_graph.neighbors(node)):
+                self.__remove_available_color(neighbor, node_color)
+
+            if not self.__is_color_upgradeable(node):
+                self.__nx_graph.nodes[node]["available_colors"] = [node_color]
+
+    def __remove_available_color(self, key, color):
+        color_buffer = self.__nx_graph.nodes[key]["available_colors"]
+        if color in color_buffer:
+            color_buffer.remove(color)
+        self.__nx_graph.nodes[key]["available_colors"] = color_buffer
+
+    def __add_available_color(self, key, color):
+        color_buffer = self.__nx_graph.nodes[key]["available_colors"]
+        if color not in color_buffer:
+            color_buffer.append(color)
+        self.__nx_graph.nodes[key]["available_colors"] = color_buffer
