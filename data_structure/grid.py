@@ -40,3 +40,21 @@ class Grid:
         # print(result)
 
         return cpt_true, cpt_false
+
+    def get_row_by_index(self, index):
+        """
+        Method to get a complete row of the grid
+
+        :param index: Index of the needed row
+        :return: Return the row as a list of values
+        """
+        return self.__matrix[index, :]
+
+    def get_column_by_index(self, index):
+        """
+        Method to get a complete column of the grid
+
+        :param index: Index of the needed column
+        :return: return the column as a list of values
+        """
+        return self.__matrix[:, index]
