@@ -1,2 +1,1 @@
-# Ignore pycharm file
-/.idea/
+*.pyc
