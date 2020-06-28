@@ -24,6 +24,7 @@ class GraphSolver:
         :return: Return the solved grid
         """
         self.__build_graph()
+        self.__fill_node_colors()
 
         self.__display_graph()
 
@@ -64,3 +65,33 @@ class GraphSolver:
         """
         nx.draw(self.__nx_graph, with_labels=True, font_weight='bold')
         plt.show()
+
+    def __fill_node_colors(self):
+        """
+        Method to initialized node color
+        A color represent the value taken by a node. This feature is stored as a node attribute
+        """
+        nx.set_node_attributes(self.__nx_graph, 0, "color")
+        nx.set_node_attributes(self.__nx_graph, True, "color_upgradeable")
+
+        for node in self.__nx_graph.nodes:
+            self.__nx_graph.nodes[node]["color"] = self.__grid.get_value(node[0], node[1])
+            self.__nx_graph.nodes[node]["color_upgradeable"] = False
+
+    def __get_color(self, key):
+        """
+        Method to get the color of a node
+
+        :param key: Name of the node
+        :return: Return the color value
+        """
+        return self.__nx_graph.nodes[key]["color"]
+
+    def __is_color_upgradeable(self, key):
+        """
+        Method to get the upgradeable status of a node
+
+        :param key: Name of the node
+        :return: Return the upgradeable status
+        """
+        return self.__nx_graph.nodes[key]["color_upgradeable"]
